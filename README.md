@@ -1,0 +1,1 @@
+Keeps track on user activities in Chrome
