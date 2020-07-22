@@ -11,7 +11,8 @@
       "src/config.js",
       "src/sites.js",
       "src/tracker.js",
-      "src/background.js"]
+      "src/background.js"
+    ]
   },
 
   "permissions": [
