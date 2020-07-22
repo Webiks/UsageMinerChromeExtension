@@ -1,0 +1,32 @@
+{
+  "name": "usage-miner-chrome-extension",
+  "version": "0.1.0",
+  "author": "Chaim Paciorkowsi (chaim@webiks.com)",
+  "description": "Keeps track on user activities in Chrome",
+  "scripts": {
+    "build:chrome": "webpack --config chrome/webpack.config.js",
+    "build:chrome-production": "webpack -p --config chrome/webpack.config.prod.js",
+    "watch:chrome": "webpack --config chrome/webpack.config.js -w",
+    "build": "npm run clean && npm run build:angular && npm run build:chrome",
+    "build:production": "npm run build:angular-production && npm run build:chrome-production && npm run pack",
+    "pack": "cd angular/dist && bestzip ../../extension-build.zip *"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Webiks/UsageMinerChromeExtension"
+  },
+  "keywords": [
+    "chrome",
+    "extension"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Webiks/UsageMinerChromeExtension/issues"
+  },
+  "homepage": "https://github.com/Webiks/UsageMinerChromeExtension#readme",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "qs": "^6.9.4"
+  }
+}
