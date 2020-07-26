@@ -7,19 +7,13 @@ import Tracker from './tracker';
 const postStats = async (stats) => {
 // const postStats = (stats) => {
   const data = { stats: stats };
-  const url = "localhost:3003";
+  const url = "http://localhost:3003";
   console.log("Publish JSON: " + JSON.stringify(data, null, 2) );
   console.log("Publish JSON: " + url);
 
-  const res = await axios.post(url, data);
-
-  console.log(`Status code: ${res.status}`);
-  console.log(`Status text: ${res.statusText}`);
-  console.log(`Request method: ${res.request.method}`);
-  console.log(`Path: ${res.request.path}`);
-
-  console.log(`Date: ${res.headers.date}`);
-  console.log(`Data: ${res.data}`);
+  await axios.post(url, data)
+    .then(response => console.log("Status Code: ", response.status))
+    .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 }
 
 function publishStats() {
@@ -85,6 +79,8 @@ const theConfig = new Config();
 const theSites = new Sites(theConfig);
 const theTracker = new Tracker(theConfig, theSites);
 // const publisher = new Publisher();
+
+// theConfig.loadConfig.load();
 
 // Listen for message which come from the user through the popup.
 // Fired when a message is sent from either an extension process or a content script
