@@ -1,30 +1,19 @@
-// var _gaq = _gaq || [];
-// _gaq.push(['_setAccount', 'UA-45267314-2']);
-// _gaq.push(['_trackPageview']);
-//
-// (function() {
-//   var ga = document.createElement('script');
-//   ga.type = 'text/javascript';
-//   ga.async = true;
-//   ga.src = 'https://ssl.google-analytics.com/ga.js';
-//   var s = document.getElementsByTagName('script')[0];
-//   s.parentNode.insertBefore(ga, s);
-// })();
+import Config from './config';
+import Sites from './sites';
 
-const config = new Config();
-const gsites = new Sites(config);
+const theConfig = new Config();
+const gsites = new Sites(theConfig);
 
-function addIgnoredSite(new_site) {
+function addIgnoredSite(add_site) {
   return function() {
-    // chrome.extension.sendRequest(
-    chrome.runtime.sendMessage({action: "addIgnoredSite", site: new_site}, response => {
+    chrome.runtime.sendMessage({action: "addIgnoredSite", site: add_site}, response => {
       initialize();
     });
   };
 }
 
 function secondsToString(seconds) {
-  if(config.timeDisplayFormat === Config.timeDisplayFormatEnum.MINUTES) {
+  if(theConfig.timeDisplayFormat === Config.timeDisplayFormatEnum.MINUTES) {
     return (seconds / 60).toFixed(2);
   }
 
@@ -54,9 +43,9 @@ function secondsToString(seconds) {
 
 function addLocalDisplay() {
   const old_tbody = document.getElementById("stats_tbody");
-  const tbody = document.createElement("tbody");
-  tbody.setAttribute("id", "stats_tbody");
-  old_tbody.parentNode.replaceChild(tbody, old_tbody);
+  const new_tbody = document.createElement("tbody");
+  new_tbody.setAttribute("id", "stats_tbody");
+  old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
 
   /* Sort sites by time spent */
   const sites = gsites.sites;
@@ -90,7 +79,7 @@ function addLocalDisplay() {
   cell.appendChild(document.createTextNode(("100")));
   row.appendChild(cell);
   row = setPercentageBG(row, 0);
-  tbody.appendChild(row);
+  new_tbody.appendChild(row);
 
   let maxTime = 0;
   if(sortedSites.length) {
@@ -124,7 +113,7 @@ function addLocalDisplay() {
     relativePct = (sites[site] / maxTime * 100).toFixed(2);
     row = setPercentageBG(row, relativePct);
     row.appendChild(cell);
-    tbody.appendChild(row);
+    new_tbody.appendChild(row);
   }
 
   /* Show the "Show All" link if there are some sites we didn't show. */
@@ -173,16 +162,16 @@ function clearStats() {
 function initialize() {
   addLocalDisplay();
 
-  if(config.lastClearTime) {
+  if(theConfig.lastClearTime) {
     const div = document.getElementById("lastClear");
     if(div.childNodes.length === 1) {
       div.removeChild(div.childNodes[0]);
     }
     div.appendChild(
-      document.createTextNode("Last Reset: " + new Date(config.lastClearTime).toString()));
+      document.createTextNode("Last Reset: " + new Date(theConfig.lastClearTime).toString()));
   }
 
-  let nextClearStats = config.nextTimeToClear;
+  let nextClearStats = theConfig.nextTimeToClear;
   if(nextClearStats) {
     nextClearStats = parseInt(nextClearStats, 10);
     nextClearStats = new Date(nextClearStats);

@@ -2,7 +2,7 @@
  * Stores the time that is spent on each site.
  * The primary interface to this class is through setCurrentFocus.
  */
-function Sites(config) {
+export default function Sites(config) {
   this._config = config;
   if(!localStorage.sites) {
     localStorage.sites = JSON.stringify({});
@@ -27,7 +27,7 @@ function getKeyName() {
   const date = new Date();
   let keyName = date.getFullYear() + "-" + (date.getMonth() + 1 ) + "-" + date.getDate();
   keyName = "sites:intervention@" + keyName;
-  console.log("keyName: " + keyName);
+  console.log("Key Name: " + keyName);
   return keyName;
 }
 

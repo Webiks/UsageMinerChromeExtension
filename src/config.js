@@ -3,7 +3,7 @@
  *
  * Abstracts away the underlying storage mechanism.
  */
-function Config() {
+export default function Config() {
   if(!localStorage.ignoredSites) {
     localStorage.ignoredSites = JSON.stringify([]);
   }
