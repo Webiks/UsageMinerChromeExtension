@@ -43,37 +43,32 @@ module.exports = {
         use: [
           {loader: 'html-loader'}
         ]
+      },
+      {
+        test: /\.js$/,              // Run the loader on all .js files
+        exclude: /node_modules/,    // ignore all files in the node_modules folder
+        use: [
+          {loader: 'jshint-loader'}
+        ]
       }
-      // {
-      //   test: /\.js$/, // Run the loader on all .js files
-      //   exclude: /node_modules/, // ignore all files in the node_modules folder
-      //   use: [
-      //     {loader: 'jshint-loader'}
-      //   ]
-      // }
     ]
   },
   plugins: [
     // clean the build folder
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Webpack Background',
       template: join(__dirname, 'views', 'background.html'),
       filename: 'background.html',
       chunks: ['background']
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: 'assets',
-    //       to: 'build'
-    //     },
-    //     {
-    //       from: 'views',
-    //       to: 'build'
-    //     }
-    //   ]
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        './manifest.json',
+        { from: 'assets', to: 'assets' },
+        { from: 'views', to: 'views' }
+      ]
+    }),
     new WriteFilePlugin(),
   ],
   resolve: {
