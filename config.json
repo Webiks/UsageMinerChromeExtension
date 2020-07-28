@@ -1,0 +1,5 @@
+{
+  "hostname": "localhost",
+  "port": 3003,
+  "intervalInMinutes": 1
+}

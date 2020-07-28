@@ -31,5 +31,9 @@
     "128": "assets/icon.png"
   },
 
+  "web_accessible_resources": [
+    "./config.json"
+  ],
+
   "minimum_chrome_version": "68"
 }

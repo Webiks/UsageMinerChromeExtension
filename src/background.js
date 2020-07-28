@@ -1,44 +1,9 @@
+"use strict";
 
-import axios from 'axios';
 import Config from './config';
 import Sites from './sites';
 import Tracker from './tracker';
-
-const postStats = async (stats) => {
-
-  const data = { stats: stats };
-  const url = 'http://localhost:3003';
-  console.log('Publish JSON: ' + JSON.stringify(data, null, 2) );
-  console.log('Publish JSON: ' + url);
-
-  await axios.post(url, data)
-    .then((response) => {
-      console.log('Status Code: ' + response.status);
-      if(response.status === 200) {
-        console.log('Status Text: ' + response.statusText);
-        // clearStats(theConfig);
-        theSites.clear();
-      }
-    }, (error) => {
-      console.log(error);
-    })
-    .catch(() => console.log('Can’t access ' + url + ' response. Blocked by browser?'))
-}
-
-function publishStats() {
-
-  const stats = [];
-  const siteList = JSON.parse(localStorage.sites);
-  for(let site in siteList) {
-    if(siteList.hasOwnProperty(site) /* && !theConfig.isIgnoredSite(site) */ ) {
-      console.log(`Publish Stats: ${site} : ${siteList[site]}`);
-      stats.push({domain: site, time: siteList[site]});
-    }
-  }
-  console.log('Publish JSON: ' + JSON.stringify(stats));
-  // publisher.postStats(stats);
-  const p = postStats(stats);
-}
+import Publisher from './publisher';
 
 function clearStats() {
 
@@ -70,9 +35,7 @@ function clearStats() {
 const theConfig = new Config();
 const theSites = new Sites(theConfig);
 const theTracker = new Tracker(theConfig, theSites);
-// const publisher = new Publisher();
-
-// theConfig.loadConfig.load();
+const publisher = new Publisher(theSites);
 
 // Listen for message which come from the user through the popup.
 // Fired when a message is sent from either an extension process or a content script
@@ -100,15 +63,5 @@ chrome.alarms.create('clearStats', {periodInMinutes: 2});
 chrome.alarms.onAlarm.addListener(alarm => {
   if(alarm.name === 'clearStats') {
     clearStats(theConfig);
-  }
-});
-
-// Creates an alarm. Near the time(s) specified by alarmInfo, the onAlarm event is fired.
-chrome.alarms.create('publishStats', {periodInMinutes: 1});
-
-// Fired when an alarm period has elapsed
-chrome.alarms.onAlarm.addListener(alarm => {
-  if(alarm.name === 'publishStats') {
-    publishStats(theSites);
   }
 });

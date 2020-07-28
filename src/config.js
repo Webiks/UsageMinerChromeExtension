@@ -19,13 +19,13 @@ Config.prototype.addIgnoredSite = function(site) {
   if(this.isIgnoredSite(site)) {
     return;
   }
-  var sites = JSON.parse(localStorage.ignoredSites);
+  const sites = JSON.parse(localStorage.ignoredSites);
   sites.push(site);
   localStorage.ignoredSites = JSON.stringify(sites);
 };
 
 Config.prototype.isIgnoredSite = function(site) {
-  var sites = JSON.parse(localStorage.ignoredSites);
+  const sites = JSON.parse(localStorage.ignoredSites);
   for(let i in sites) {
     if(sites[i] === site) {
       return true;
