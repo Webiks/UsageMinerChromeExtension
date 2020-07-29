@@ -49,25 +49,6 @@ Object.defineProperty(Sites.prototype, "sites", {
 });
 
 /**
- * Returns the a dictionary of sitesToday -> seconds.
- */
-// Object.defineProperty(Sites.prototype, sitesToday, {
-//     get: function () {
-//         // Get per day stats
-//         var key = getKeyName();
-//         var st = JSON.parse(localStorage.getItem(sitesToday));
-//         var sitesToday = {};
-//         for(var site in st) {
-//             if(st.hasOwnProperty(site) && !this._config.isIgnoredSite(site)) {
-//                 sitesToday[site] = st[site];
-//             }
-//         }
-//         console.log("sitesToday=" + sitesToday);
-//         return sitesToday;
-//     }
-// });
-
-/**
  * Returns just the site/domain from the url. Includes the protocol.
  * chrome://extensions/some/other?blah=ffdf -> chrome://extensions
  * @param {string} url The URL of the page, including the protocol.
@@ -128,12 +109,6 @@ Sites.prototype.setCurrentFocus = function (url) {
     chrome.browserAction.setIcon({ path: { 19: 'assets/icon19.png', 38: 'assets/icon38.png'}});
 
     if(this._currentSite === null) return;
-
-    // if(this._currentSite.indexOf("www.facebook.com") > -1) {
-    //     var fbTime = JSON.parse(localStorage.sites)[this._currentSite];
-    //     var msg = 'You have spent ' + fbTime + " seconds on Facebook.";
-    //     msg += '\nSo when are you leaving Facebook?';
-    // }
 
     // Gets all tabs that have the specified properties, or all tabs if no properties are specified
     chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
