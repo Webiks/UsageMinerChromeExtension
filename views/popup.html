@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Popup</title>
+        <style>
+            td,th {
+                color: black;
+            }
+        </style>
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="buttons.css"/>
+        <script src="../src/config.js"></script>
+        <script src="../src/sites.js"></script>
+        <script src="../src/popup.js"></script>
+    </head>
+    <body>
+        <div id="button_row">
+            <button id="options" class="pure-button">Options</button>&nbsp;
+            <button id="clear" class="pure-button">Clear</button>&nbsp;
+        </div>
+        <div id="lastClear"></div>
+        <div id="nextClear"></div>
+        <div>
+            <table id="stats">
+                <thead>
+                    <tr>
+                        <th scope="col">Website</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Percent</th>
+                    </tr>
+                </thead>
+                <tbody id="stats_tbody"></tbody>
+            </table>
+        </div>
+    </body>
+</html>

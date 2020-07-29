@@ -1,0 +1,150 @@
+body {
+    line-height: 1.6em;
+}
+
+#stats {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    width: 480px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+#stats th {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 8px;
+    background: #b9c9fe;
+    border-top: 4px solid #aabcfe;
+    border-bottom: 1px solid #fff;
+    color: #039;
+}
+
+#stats tbody tr {
+    background-attachment: fixed;
+}
+
+#stats tr {
+    background: #e8edff;
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid transparent;
+}
+
+#stats td {
+    padding: 8px;
+}
+
+#stats tr:hover td {
+    background: #d0dafd;
+    color: #339;
+}
+
+#stats img {
+    padding-right: 6px;
+}
+
+#stats a:link,
+#stats a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#stats a:hover {
+    color: #00E;
+}
+
+#stats a:active {
+    color: red;
+}
+
+.move-right {
+    float: right;
+}
+
+.logo {
+    font-size: 200%;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    font-size: 20px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.input-text {
+    width: 100%;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.submit-cancel {
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    background-color: #cd5c5c;
+}
+
+.btn-submit {
+    background-color: #0275d8;
+}
+
+.btn-submit, .btn-cancel {
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.btn-with-img {
+   margin-bottom: 10px;
+}
+
+label {
+    font-size: 20px;
+}
+
+button {
+    margin-top: 5px;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+}
